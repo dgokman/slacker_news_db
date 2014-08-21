@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Slacker News</title>
+
+    <link rel="stylesheet" href="styles.css">
+  </head>
+
+   <body>
+     <div id="heading">
+      <img src="/y18.gif" alt=""/><strong><a href="/" class="h3">Slacker News</a></strong> <span id="header_links"> new | <a href="/comments.html">comments</a> | show | ask | jobs | <a href="/submit">submit</a> </span>
+    </div>
+
+    <%= yield %>
+     <div id="footer">
+      <hr>
+       <p id="footer_links">Guidelines | FAQ | Lists | Bookmarklet | DMCA | News News | Bugs and Feature Requests | Y Combinator | Apply | Library | Contact</p>
+       <form>
+       Search: <input type="text" name="search" maxlength="50" size="30"></form>
+      </div>
+   </body>
+  </html>
