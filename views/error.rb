@@ -1,4 +1,3 @@
-
 <div id="container">
 <div id="add_article">Add Article</div><br>
      <form id="articles" action="/articles" method="post">

@@ -6,7 +6,7 @@
      <input type="submit" value="add comment">
     </form><br>
   <% @comments.each do |comment| %>
-   <li><%= comment["comment"] %></li>
+   <li><%= comment["comment"] %> <%= comment["time"][0..15] %></li>
    <% end %>
   </div>
 

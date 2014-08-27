@@ -1,11 +1,11 @@
-
 <div id="container">
 <div id="add_article">Add Article</div><br>
      <form id="articles" action="/articles" method="post">
-     Name: <input type="text" name="title" size="30"/><br><br>
-     URL: <input type="text" name="url" size="30"/><br><br>
+     Name: <input type="text" name="title" size="30" value="<%= @title %>"/><br><br>
+     URL: <input type="url" name="url" size="30"/><br><br>
      Description: <input type="text" name="description" size="60"/><br><br>
      <input type="submit" value="add article">
     </form>
-
+    <br>
+    <div id="add_article">Error</div>
 </div>
