@@ -17,8 +17,7 @@ end
 
 get "/articles" do
   db_connection do |conn|
-    results = conn.exec('SELECT articles.title AS title, articles.url AS url,
-     articles.description AS description
+    results = conn.exec('SELECT id, title, url, description
      FROM articles')
     @articles = results.to_a
   end
@@ -37,6 +36,28 @@ post "/articles" do
   db_connection do |conn|
     insert = conn.exec_params('INSERT INTO articles (title, url, description)
       VALUES ($1, $2, $3)',[title, url, description])
+
+  end
+  redirect '/articles'
+
+end
+
+get "/articles/:id/comments" do
+  id = params[:id]
+  db_connection do |conn|
+    results = conn.exec_params('SELECT comment, article_id
+     FROM comments
+     WHERE article_id = $1', [id])
+    @comments = results.to_a
+  end
+  erb :comments
+end
+
+post "/articles/:id/comments" do
+  comment = params["comments"]
+  db_connection do |conn|
+    insert = conn.exec_params('INSERT INTO comments (comment, article_id)
+      VALUES ($1, $2)',[comment, params[:id]])
 
   end
   redirect '/articles'
