@@ -6,8 +6,8 @@
 
       <ol>
        <% @articles.each do |article| %>
-       <li class="topic"><a href="/vote.html">&#x25B2; </a><a href="<%= article[:url] %>" class="link"><%= article[:title] %></a><span class="url"> <%= article[:url] %></span></li>
-       <div class="points"><%= article[:description] %></div>
+       <li class="topic"><a href="/vote.html">&#x25B2; </a><a href="<%= article["url"] %>" class="link"><%= article["title"] %></a><span class="url"> <%= article["url"] %></span></li>
+       <div class="points"><%= article["description"] %></div>
        <% end %>
 
        <!--<li class="topic"><a href="/vote.html">&#x25B2; </a><a href="https://www.firebase.com/blog/2013-08-15-firebase-leaves-beta-today.html" class="link">Firebase Leaves Beta Today</a><span class="url"> (firebase.com)</span></li>
