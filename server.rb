@@ -15,7 +15,7 @@ def db_connection
 end
 
 
-get "/" do
+get "/articles" do
   db_connection do |conn|
     results = conn.exec('SELECT articles.title AS title, articles.url AS url,
      articles.description AS description
@@ -39,7 +39,7 @@ post "/articles" do
       VALUES ($1, $2, $3)',[title, url, description])
 
   end
-  redirect '/'
+  redirect '/articles'
 
 end
 

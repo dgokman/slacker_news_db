@@ -6,7 +6,7 @@
 
       <ol>
        <% @articles.each do |article| %>
-       <li class="topic"><a href="/vote.html">&#x25B2; </a><a href="<%= article["url"] %>" class="link"><%= article["title"] %></a><span class="url"> <%= article["url"] %></span></li>
+       <li class="topic"><a href="/vote.html">&#x25B2; </a><a href="<%= article["url"] %>" class="link" target="_blank"><%= article["title"] %></a><span class="url"> <%= article["url"] %></span></li>
        <div class="points"><%= article["description"] %></div>
        <% end %>
 
