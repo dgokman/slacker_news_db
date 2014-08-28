@@ -42,7 +42,7 @@ post "/articles" do
   url = params["url"]
   description = params["description"]
 
-   if /./ !~ title || /^#{URI::regexp(%w(http https))}$/ !~ url || description.length < 20
+   if description.length < 20
     redirect '/articles/new/error'
    else
     db_connection do |conn|
