@@ -2,13 +2,15 @@
 <div id="container">
 <div id="add_article">Add Article</div><br>
      <form id="articles" action="/articles" method="post">
-     Name: <input type="text" name="title" size="30" required/><br><br>
-     URL: <input type="text" name="url" size="30"/><br><br>
-     Description: <input type="text" name="description" size="60" required/><br><br>
+     <label for="title">Name:</label>
+     <input type="text" name="title" size="30" required value="<%= @article[:title] %>" /><br><br>
+     URL: <input type="text" name="url" size="30" value="<%= @article[:url] %>"/><br><br>
+     Description: <input type="text" name="description" size="60" required value="<%= @article[:description] %>"/><br><br>
      <input type="submit" value="add article">
     </form>
 
     <% if @error %>
       <p><%= @error %></p>
     <% end %>
+
 </div>

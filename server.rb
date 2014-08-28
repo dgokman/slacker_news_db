@@ -26,15 +26,8 @@ get "/articles" do
 end
 
 get "/articles/new" do
-
+  @article = {}
   erb :submit
-end
-
-get "/articles/new/error" do
-  @title = params["title"]
-  @url = params["url"]
-  @description = params["description"]
-  erb :error
 end
 
 post "/articles" do
@@ -42,8 +35,10 @@ post "/articles" do
   url = params["url"]
   description = params["description"]
 
+  @article = { title: title, url: url, description: description }
+
    if /./ !~ title || /^#{URI::regexp(%w(http https))}$/ !~ url || description.length < 20
-    @error = 'You did it wron.'
+    @error = 'You did it wrong'
     erb :submit
    else
     db_connection do |conn|
@@ -72,16 +67,16 @@ end
 
 post "/articles/:id/comments" do
   comment = params["comments"]
-
-    db_connection do |conn|
-     insert = conn.exec_params('INSERT INTO comments (comment, article_id, created_at)
-      VALUES ($1, $2, $3)',[comment, params[:id], DateTime.now])
-  end
-
-  redirect '/articles'
+  @comments1 = { comment: comment }
+    if /./ !~ comment
+      @error = 'You did it wrong'
+      erb :comments
+    else db_connection do |conn|
+      insert = conn.exec_params('INSERT INTO comments (comment, article_id)
+      VALUES ($1, $2)',[comment, params[:id]])
+      end
+     redirect '/articles'
+    end
 
 end
-
-
-
 
