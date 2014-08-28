@@ -17,10 +17,14 @@ end
 
 
 get "/articles" do
+  @url = []
   db_connection do |conn|
     results = conn.exec('SELECT id, title, url, description
      FROM articles')
     @articles = results.to_a
+    @articles.each do |article|
+      @url << article["url"]
+    end
   end
   erb :index
 end
@@ -31,13 +35,22 @@ get "/articles/new" do
 end
 
 post "/articles" do
+  @url = []
+  db_connection do |conn|
+    results = conn.exec('SELECT id, title, url, description
+     FROM articles')
+    @articles = results.to_a
+    @articles.each do |article|
+      @url << article["url"]
+    end
+  end
   title = params["title"]
   url = params["url"]
   description = params["description"]
 
   @article = { title: title, url: url, description: description }
 
-   if /./ !~ title || /^#{URI::regexp(%w(http https))}$/ !~ url || description.length < 20
+   if /./ !~ title || /^#{URI::regexp(%w(http https))}$/ !~ url || description.length < 20 || @url.include?(url)
     @error = 'You did it wrong'
     erb :submit
    else
