@@ -66,8 +66,8 @@ get "/articles/:id/comments" do
 end
 
 post "/articles/:id/comments" do
+  @comments = {}
   comment = params["comments"]
-  @comments1 = { comment: comment }
     if /./ !~ comment
       @error = 'You did it wrong'
       erb :comments
