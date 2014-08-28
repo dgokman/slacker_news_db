@@ -2,12 +2,16 @@
 
     <form id="comments" action="/articles/<%= params[:id] %>/comments" method="post">
      <br>
-     <textarea name="comments" cols="40" rows="6"></textarea><br>
+     <textarea name="comments" cols="40" rows="6" required/></textarea><br>
      <input type="submit" value="add comment">
     </form><br>
+
+
+
   <% @comments.each do |comment| %>
    <li><%= comment["comment"] %> <%= comment["time"][0..15] %></li>
    <% end %>
+
   </div>
 
 

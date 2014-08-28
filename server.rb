@@ -37,20 +37,21 @@ get "/articles/new/error" do
   erb :error
 end
 
-
 post "/articles" do
   title = params["title"]
   url = params["url"]
   description = params["description"]
-  if /./ !~ title || /^#{URI::regexp(%w(http https))}$/ !~ url || /./ !~ description || description.length < 20
-    redirect "/articles/new/error"
+
+   if /./ !~ title || /^#{URI::regexp(%w(http https))}$/ !~ url || description.length < 20
+    redirect '/articles/new/error'
    else
-   db_connection do |conn|
-    insert = conn.exec_params('INSERT INTO articles (title, url, description)
+    db_connection do |conn|
+     insert = conn.exec_params('INSERT INTO articles (title, url, description)
       VALUES ($1, $2, $3)',[title, url, description])
+    end
    end
     redirect '/articles'
-  end
+  # end
 end
 
 
@@ -67,12 +68,11 @@ get "/articles/:id/comments" do
 end
 
 post "/articles/:id/comments" do
-
   comment = params["comments"]
-  db_connection do |conn|
-    insert = conn.exec_params('INSERT INTO comments (comment, article_id)
-      VALUES ($1, $2)',[comment, params[:id]])
 
+    db_connection do |conn|
+     insert = conn.exec_params('INSERT INTO comments (comment, article_id)
+      VALUES ($1, $2)',[comment, params[:id]])
   end
 
   redirect '/articles'
